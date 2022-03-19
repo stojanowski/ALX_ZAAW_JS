@@ -1,19 +1,28 @@
 body {
-    background-color: lightblue;
-  }
-  
-  button {
-    color: black;
-    text-align: center;
-    border-radius: 1%;
-  }
-  
-  p {
-    font-family: verdana;
-    font-size: 12px;
-  }
+  background-color: lightblue;
+}
 
-  .list {
-    color: red;
-  }
+button {
+  color: black;
+  text-align: center;
+  border-radius: 1%;
+}
 
+p {
+  font-family: verdana;
+  font-size: 12px;
+}
+
+.list {
+  color: green;
+}
+
+.done {
+  text-decoration: line-through;
+  color: darkseagreen;
+}
+
+.noTdone {
+  text-decoration: none;
+  color: green;
+}
