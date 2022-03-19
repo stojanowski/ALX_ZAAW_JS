@@ -1,3 +1,5 @@
+// zrobić jeszcze usuwanie w localStorage i walidację formularza
+
 let tasksList = [];
 
 function btClick() {
@@ -30,19 +32,24 @@ function showTasks() {
 
   listaUL.innerHTML = taskStr + "<br/>";
 }
-// zrobić usuwanie i modyfikację w localStorage
+
 function chckClick(el) {
   let element = el.parentElement;
   let ele = element.querySelector("span");
+  let elIndex = tasksList.map((e) => e.guid).indexOf(element.id);
   console.log(el.parentElement);
   console.log(element.id);
+  console.log(elIndex);
   if (ele.classList.contains("done")) {
     ele.classList.remove("done");
     ele.classList.add("noTdone");
+    tasksList[elIndex].isDone = false;
   } else {
     ele.classList.remove("noTdone");
     ele.classList.add("done");
+    tasksList[elIndex].isDone = true;
   }
+  localStorage.setItem("tasksList", JSON.stringify(tasksList));
 }
 
 function createGuid() {
