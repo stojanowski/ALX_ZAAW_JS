@@ -8,24 +8,16 @@
     <script src="todo.js"></script>
 </head>
 <body>
-    <form action="" method="post" id="theForm">
         <p>
             Nazwa zadania:
-            <input type="text" name="task">
+            <input type="text" id="taskTxt">
         </p>
         <p>
-            Termin:
-            <input type="text" name="termin">
+            <button onclick="btClick()">Dodaj</button>
         </p>
-        <p>
-            <button onclick="btClick">Dodaj</button>
-        </p>
-    </form>
-
-
     <p>
         Lista ToDo:<br/>
-        <ul>
+        <ul id="listaToDo">
 
         </ul>
     </p>
