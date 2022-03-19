@@ -1,0 +1,3 @@
+function btClick( {
+    alert("a");
+})
