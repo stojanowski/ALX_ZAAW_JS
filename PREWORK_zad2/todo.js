@@ -1,11 +1,10 @@
-// zrobić jeszcze usuwanie w localStorage i walidację formularza
+// zrobić jeszcze walidację formularza
 
 let tasksList = [];
 
 function btClick() {
   getTasksLS();
   addTask();
-  showTasks();
 }
 
 function getTasksLS() {
@@ -17,6 +16,8 @@ function addTask() {
   tasksList.push({ val: task.value, isDone: false, guid: createGuid() });
   task.value = "";
   localStorage.setItem("tasksList", JSON.stringify(tasksList));
+
+  showTasks();
 }
 
 function showTasks() {
@@ -27,7 +28,9 @@ function showTasks() {
     taskStr += `<div id='${el.guid}'><input type='checkbox' onclick='chckClick(this)' ${
       el.isDone ? "checked" : ""
     }> 
-    <span ${el.isDone ? "class='done'" : "class='noTdone'"}> ${el.val}</span></div><br/>`;
+    <span ${el.isDone ? "class='done'" : "class='noTdone'"}> ${
+      el.val
+    }</span><button onclick='delClick(this)'>x</button></div><br/>`;
   });
 
   listaUL.innerHTML = taskStr + "<br/>";
@@ -50,6 +53,15 @@ function chckClick(el) {
     tasksList[elIndex].isDone = true;
   }
   localStorage.setItem("tasksList", JSON.stringify(tasksList));
+}
+
+function delClick(el) {
+  let element = el.parentElement;
+  let elIndex = tasksList.map((e) => e.guid).indexOf(element.id);
+  console.log(element.id);
+  tasksList.splice(elIndex, 1);
+  localStorage.setItem("tasksList", JSON.stringify(tasksList));
+  showTasks();
 }
 
 function createGuid() {
