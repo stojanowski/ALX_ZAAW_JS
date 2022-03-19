@@ -1,7 +1,17 @@
+var tasksList = [];
+
 function btClick() {
-    let listaUL = document.getElementById("listaToDo");
-    let task = document.getElementById("taskTxt");
-    listaUL.innerHTML += "<input type='checkbox'>";
-    listaUL.innerHTML += task.value + "<br/>";
+    showTasks();
+}
+function showTasks() {
+    const listaUL = document.querySelector("#listaToDo");
+    let task = document.querySelector("#taskTxt");
+    
+    tasksList.push(task.value);
+    let taskStr = "";
+    tasksList.forEach(element => {
+        taskStr += "<input type='checkbox'>" + element + "<br/>";
+    }); 
     task.value = "";
+    listaUL.innerHTML = taskStr + "<br/>";
 };

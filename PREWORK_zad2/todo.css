@@ -1,0 +1,19 @@
+body {
+    background-color: lightblue;
+  }
+  
+  button {
+    color: black;
+    text-align: center;
+    border-radius: 1%;
+  }
+  
+  p {
+    font-family: verdana;
+    font-size: 12px;
+  }
+
+  .list {
+    color: red;
+  }
+
