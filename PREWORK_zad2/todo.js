@@ -13,6 +13,12 @@ function getTasksLS() {
 
 function addTask() {
   let task = document.querySelector("#taskTxt");
+
+  if (task.value.length < 2) {
+    alert("Za mało znaków !");
+    return;
+  }
+
   tasksList.push({ val: task.value, isDone: false, guid: createGuid() });
   task.value = "";
   localStorage.setItem("tasksList", JSON.stringify(tasksList));
