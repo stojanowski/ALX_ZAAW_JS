@@ -1,0 +1,15 @@
+.inp {
+  background-color: lightgray;
+  display: block;
+}
+
+.messageIn {
+  background-color: lightgray;
+  width: 30em;
+  display: block;
+}
+
+.divCol2 {
+  display: inline-block;
+  margin: 10px 5px;
+}
