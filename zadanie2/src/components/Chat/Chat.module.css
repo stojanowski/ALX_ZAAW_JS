@@ -2,4 +2,13 @@
   background-color: lightcyan;
   width: 50em;
   height: 30em;
+  margin: 5;
+  padding: 5;
+  border: 0;
+  outline: 0;
+  font-size: 14px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  border: 3px solid #556677;
+  cursor: all-scroll;
 }

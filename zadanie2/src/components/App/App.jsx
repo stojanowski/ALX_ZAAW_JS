@@ -17,6 +17,8 @@ import styles from "./App.module.css";
 // ];
 function App() {
   const [messT, setMess] = useState([]);
+  const [noPerson, setNoPerson] = useState(false);
+  const [noMessage, setNoMessage] = useState(false);
 
   useEffect(() => {
     // nullish operator ?? []
@@ -29,6 +31,22 @@ function App() {
 
     const personI = document.querySelector("#person");
     const messageI = document.querySelector("#message");
+
+    if (personI.value.length === 0) {
+      setNoPerson(true);
+    } else {
+      setNoPerson(false);
+    }
+
+    if (messageI.value.length === 0) {
+      setNoMessage(true);
+    } else {
+      setNoMessage(false);
+    }
+
+    if (personI.value.length === 0 || messageI.value.length === 0) {
+      return;
+    }
 
     const newMess = [
       ...messT,
@@ -52,11 +70,11 @@ function App() {
       <form onSubmit={handleSubmit}>
         <div>
           <div className={styles.divCol2}>
-            Person:
+            Person: {noPerson ? <span className={styles.err}>*</span> : null}
             <input className={styles.inp} type="text" id="person" />
           </div>
           <div className={styles.divCol2}>
-            Message:
+            Message: {noMessage ? <span className={styles.err}>*</span> : null}
             <input className={styles.messageIn} type="text" id="message" />
           </div>
           <div className={styles.divCol2}>
