@@ -1,9 +1,7 @@
-.chatWindow {
+.chatMainDiv {
   background-color: lightcyan;
   width: 50em;
   height: 30em;
-  margin: 5;
-  padding: 1;
   border: 0;
   outline: 0;
   font-size: 14px;

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Chat from "../Chat/Chat";
+import ChatDiv from "../ChatDiv/ChatDiv";
+
+// import Chat from "../Chat/Chat";
 
 import styles from "./App.module.css";
 
@@ -56,7 +58,6 @@ function App() {
         message: messageI.value,
       },
     ];
-    personI.value = "";
     messageI.value = "";
 
     localStorage.setItem("messT", JSON.stringify(newMess));
@@ -66,7 +67,8 @@ function App() {
   return (
     <div>
       <header>Czateria</header>
-      <Chat mess={messT} />
+      <ChatDiv mess={messT} />
+      {/* <Chat mess={messT} /> */}
       <form onSubmit={handleSubmit}>
         <div>
           <div className={styles.divCol2}>
