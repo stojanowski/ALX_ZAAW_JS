@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import ToDoList from "../ToDoList/ToDolist";
 
 import styles from "./App.module.css";
@@ -12,6 +14,11 @@ const App = () => {
   useEffect(() => {
     setTodos(JSON.parse(localStorage.getItem("todos")) ?? []);
   }, []);
+
+  const saveTodos = (todosToSave) => {
+    setTodos(todosToSave);
+    localStorage.setItem("todos", JSON.stringify(todosToSave));
+  };
 
   const handleInputValue = (event) => {
     setInputValue(event.target.value);
@@ -33,17 +40,28 @@ const App = () => {
     const newTodos = [
       ...todos,
       {
+        id: uuidv4(),
         name: inputValue,
         checked: false,
       },
     ];
 
-    setTodos(newTodos);
-
-    localStorage.setItem("todos", JSON.stringify(newTodos));
-
+    saveTodos(newTodos);
     // czyszczenie formularza
     setInputValue("");
+  };
+
+  const handleRemove = (id) => {
+    const filteredToDos = todos.filter((todo) => todo.id !== id);
+    saveTodos(filteredToDos);
+  };
+
+  const handleChceck = (id) => {
+    const indexToCh = todos.findIndex((todo) => todo.id === id);
+    const changedToDos = [...todos];
+    changedToDos[indexToCh].checked = !changedToDos[indexToCh].checked;
+
+    saveTodos(changedToDos);
   };
 
   return (
@@ -62,7 +80,7 @@ const App = () => {
         <br />
         <label className={styles.error}>{isErrorMessage ? "Błąd #2" : ""}</label>
       </form>
-      <ToDoList todoList={todos} text="xx" />
+      <ToDoList todoList={todos} onRemove={handleRemove} onCheck={handleChceck} />
     </div>
   );
 };

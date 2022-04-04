@@ -2,3 +2,13 @@
   color: rgb(70, 163, 42);
   font-size: 14px;
 }
+
+.done {
+  text-decoration: line-through;
+  color: darkseagreen;
+}
+
+.noTdone {
+  text-decoration: none;
+  color: green;
+}
