@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from "react";
-import ChatDiv from "../ChatDiv/ChatDiv";
 
 // import Chat from "../Chat/Chat";
 
-import styles from "./App.module.css";
+import { onValue, ref, set } from "@firebase/database";
 
-// const MESSAGES = [
-//   {
-//     messDT: "2022.03.21 12:10",
-//     person: "Adam",
-//     message: "Ala ma kota !",
-//   },
-//   {
-//     messDT: "2022.03.21 13:10",
-//     person: "Adam",
-//     message: "Kot ma ale !",
-//   },
-// ];
+// eslint-disable-next-line
+import database from "../../firebase";
+
+import styles from "./App.module.css";
+import ChatDiv from "../ChatDiv/ChatDiv";
+
 function App() {
   const [messT, setMess] = useState([]);
   const [noPerson, setNoPerson] = useState(false);
   const [noMessage, setNoMessage] = useState(false);
 
+  // useEffect(() => {
+  //   // nullish operator ?? []
+  //   const messTS = JSON.parse(localStorage.getItem("messT")) ?? [];
+  //   setMess(messTS);
+  // }, []);
+
   useEffect(() => {
-    // nullish operator ?? []
-    const messTS = JSON.parse(localStorage.getItem("messT")) ?? [];
-    setMess(messTS);
+    onValue(ref(database, "/"), (snapshot) => {
+      const data = snapshot.val();
+
+      setMess(Object.values(data));
+      // console.log(Object.values(data));
+    });
   }, []);
 
   const handleSubmit = (event) => {
@@ -50,18 +52,25 @@ function App() {
       return;
     }
 
-    const newMess = [
-      ...messT,
-      {
-        messDT: new Date().toLocaleString(),
-        person: personI.value,
-        message: messageI.value,
-      },
-    ];
-    messageI.value = "";
+    // const newMess = [
+    //   ...messT,
+    //   {
+    //     id: uuidv4(),
+    //     person: personI.value,
+    //     message: messageI.value,
+    //   },
+    // ];
 
-    localStorage.setItem("messT", JSON.stringify(newMess));
-    setMess(newMess);
+    const newMesageID = Date.now();
+    set(ref(database, `/${newMesageID}`), {
+      id: newMesageID,
+      person: personI.value,
+      message: messageI.value,
+    });
+
+    messageI.value = "";
+    // localStorage.setItem("messT", JSON.stringify(newMess));
+    // setMess(newMess);
   };
 
   return (

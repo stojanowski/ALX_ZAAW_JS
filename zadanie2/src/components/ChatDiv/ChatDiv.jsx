@@ -22,7 +22,7 @@ function ChatDiv({ mess }) {
       {mess.map((messItem) => (
         <>
           <br />
-          <ChatMessage key={messItem.messDT} message={messItem} />
+          <ChatMessage key={messItem.id} message={messItem} />
         </>
       ))}
       <div ref={messagesEndRef} />
